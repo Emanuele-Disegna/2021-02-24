@@ -47,17 +47,22 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
-    	
+    	model.creaGrafo(cmbMatch.getValue());
     }
 
     @FXML
     void doGiocatoreMigliore(ActionEvent event) {    	
+    	txtResult.clear();
     	
+    	txtResult.appendText("Il giocatore migliore è: "+model.getGiocatoreMigliore()+"\n");
+    	txtResult.appendText("Il suo delta è: "+model.getMigliore());
     }
     
     @FXML
     void doSimula(ActionEvent event) {
-
+    	
+    	txtResult.clear();
+    	txtResult.appendText(model.simula(Integer.parseInt(txtN.getText()), cmbMatch.getValue()).toString());
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -73,5 +78,7 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	
+    	cmbMatch.getItems().addAll(model.getAllMatches());
     }
 }
